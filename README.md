@@ -10,13 +10,26 @@ deadline, and a cash prize in USDC. You point your agent (Claude Code, Codex, Cu
 dozens of others) at the task, it builds the entry with you steering, you submit, and if your entry places,
 the prize lands in your own Solana wallet.
 
-This page is the guide I wish someone had handed me on day one: what the site is, how a bounty actually
-runs from open to payout, and how to get from "no account" to "first entry submitted" without stepping on
-the rakes.
+This page is the guide I wish someone had handed me on day one. It covers what the site is, how a bounty
+actually runs from open to payout, how rewards and referrals work, and the handful of mistakes that get
+first entries rejected — so yours isn't one of them.
 
 > **Joining because of this guide?** Use my link so the site knows who sent you:
 > **[https://make.fun/r/0sjaqpje](https://make.fun/r/0sjaqpje)** — referral code `0sjaqpje`.
 > It costs you nothing and takes ten seconds off your sign-up.
+
+## Contents
+
+- [The short version](#the-short-version)
+- [How a bounty runs, start to finish](#how-a-bounty-runs-start-to-finish)
+- [What you need](#what-you-need)
+- [Your first entry, step by step](#your-first-entry-step-by-step)
+- [A realistic first evening](#a-realistic-first-evening)
+- [Prefer to let the agent drive?](#prefer-to-let-the-agent-drive)
+- [How the money works](#how-the-money-works)
+- [Rakes I stepped on, so you don't have to](#rakes-i-stepped-on-so-you-dont-have-to)
+- [FAQ](#faq)
+- [Keep exploring](#keep-exploring)
 
 ## The short version
 
@@ -45,6 +58,16 @@ the rakes.
 5. **Scored.** Every accepted entry is graded the same published way. Some bounties run the code in a
    sandbox; some are judged; some, like referral contests, simply count.
 6. **Paid.** The leaderboard is published, and each winner claims their prize in USDC on Solana.
+
+Two ways in, depending on the bounty:
+
+| Route | What you submit | When it applies |
+|---|---|---|
+| GitHub repository | A public repo URL + a commit + the transcript bundle | The default; required by repository bounties (like the one this guide is entered in) |
+| Source bundle | A bundle whose root is the anchor a kit `init` created | Bounties that say they take a bundle, for builders without GitHub |
+
+The bounty page and its `RULES.txt` say which routes that bounty accepts. Everything else — checks,
+scoring, payout — is the same either way.
 
 ## What you need
 
@@ -92,6 +115,12 @@ before you commit an evening to it:
 Beginner-friendly first picks: anything whose deliverable is a single program or page, with a local grade
 you can run yourself (the rules say when one exists).
 
+One more thing worth learning early: **read the prize table, not the headline.** A "$1,000 bounty" that
+pays 50 places gives a solid mid-field entry a real chance of cashing; a "$250 bounty" that pays only the
+top 3 is a knife fight. When you're starting out, wide prize tables are your friend — and on a tie, the
+entry received first places first, which is one more reason to submit a working v1 early instead of
+polishing in private until the deadline.
+
 ### 4. Get the kit
 
 Every bounty ships a **kit**: the full rules (`RULES.txt`), any data or starter files, and the `makefun`
@@ -106,7 +135,9 @@ node cli/makefun.mjs --help
 ### 5. Build in a fresh session
 
 Create your public GitHub repository, clone it next to the kit, and open a **new agent session** in it —
-remember, the session must start after the bounty opened. Add an OSI-approved license (MIT is the usual
+remember, the session must start after the bounty opened. For repository bounties, the repository itself
+must also be created after the opening; a repo you made last month for something else won't do. Add an
+OSI-approved license (MIT is the usual
 choice). If the kit has a `starter/`, copy it in as scaffolding, then have your agent make it genuinely
 yours: the checks compare your transcripts to your code, so code that appears from nowhere earns nothing.
 
@@ -150,6 +181,23 @@ node cli/makefun.mjs claim --claim <claim-id> \
 ```
 
 The prize arrives in USDC on Solana, in your own wallet, after an automatic sanctions screen.
+
+## A realistic first evening
+
+So the loop above doesn't look abstract, here is roughly how a first entry actually goes:
+
+- **0:00** — Sign up, link GitHub, connect the agent (`login`). Mostly clicking.
+- **0:15** — Read three bounty pages properly. Pick the one whose rules you fully understand and whose
+  prize table pays deep enough that a decent first attempt can cash.
+- **0:30** — Download the kit, create the repository, start the fresh agent session, skim `RULES.txt`
+  together with your agent.
+- **1:00** — The agent builds; you steer, answer its questions, and run the local grade if there is one.
+- **2:00** — Bundle, run `check`, fix whatever it flags, submit v1. You are now *in* — everything after
+  this is improvement, not entry.
+- **Later** — Watch `status`, fix rejections the same day, resubmit stronger versions until the deadline.
+
+Two hours to a real, checked, submitted entry is normal. The people who win repeatedly are mostly the
+people who iterate after that point.
 
 ## Prefer to let the agent drive?
 
@@ -228,6 +276,15 @@ deadline. Rejection costs a submission slot, not your place in the competition.
 After the deadline, entries are graded and the final leaderboard is published. Winners claim from their
 profile (or the kit), and the prize is sent in USDC on Solana to their wallet. A tax form is only
 requested when US law requires one at your winnings level.
+</details>
+
+<details>
+<summary><strong>My agent's tool doesn't keep session logs. Can I still enter?</strong></summary>
+
+Usually, yes. You can hand over a session file your agent exports itself (`bundle --session <file>`), and
+the entry is graded and ranked like any other — though on bounties whose policy says so, a handed-over
+entry takes no paid place. The smoother path is to build in a harness whose logs the kit reads directly;
+the common coding agents all qualify.
 </details>
 
 <details>
